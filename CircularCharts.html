@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
+    <p><strong>Description:</strong></p>
+    <p>
+      1st visualization: Accidents by Emirate (Pie Chart): This visualization offers a pie chart breakdown of the total number of accidents by Emirate. Users can interact with the pie chart by clicking on a specific Emirate segment. This interaction filters the other visualizations to reflect data pertinent to the selected Emirate. 2nd visualization: Accident Types in Selected Emirate (Pie Chart): : This visualization tracks the breakdown of different types of accidents within a selected Emirate using a nested pie chart. Like the first visualization, clicking on a segment allows users to focus on specific accident types, influencing data shown in other components. 3rd visualization: A time trend line chart that displays changes in accident counts over time, segmented by month and filtered by selected Emirates or accident types. This chart allows users to view trends over time.
+    </p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
+  </div>
+  <hr>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Eman-Nasr/Part3DataVis/refs/heads/main/accidentsEmirates.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+    }
+  },
+  "vconcat": [
+    {
+      "title": "Accidents by Emirate",
+      "width": 400,
+      "height": 400,
+      "mark": {"type": "arc", "tooltip": true},
+      "encoding": {
+        "theta": {
+          "field": "acci_id",
+          "type": "quantitative",
+          "aggregate": "count"
+        },
+        "color": {
+          "field": "Emirate",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#0996ce",
+              "#f58442",
+              "#5b6795",
+              "#abd46f",
+              "#f19c62",
+              "#8d355f",
+              "#8c3e64",
+              "#293256"
+            ]
+          }
+        },
+        "tooltip": [
+          {"field": "Emirate", "type": "nominal", "title": "Emirate"},
+          {
+            "field": "acci_id",
+            "type": "quantitative",
+            "aggregate": "count",
+            "title": "Total Accidents"
+          }
+        ]
+      },
+      "transform": [{"filter": {"selection": "acciTypeSelection"}}],
+      "selection": {
+        "emirateSelection": {
+          "type": "single",
+          "fields": ["Emirate"],
+          "on": "click"
+        }
+      }
+    },
+    {
+      "title": "Accident Types in Selected Emirate",
+      "width": 400,
+      "height": 400,
+      "transform": [{"filter": {"selection": "emirateSelection"}}],
+      "mark": {"type": "arc", "innerRadius": 20, "stroke": "#fff"},
+      "encoding": {
+        "theta": {
+          "field": "acci_id",
+          "type": "quantitative",
+          "aggregate": "count",
+          "stack": true
+        },
+        "color": {
+          "field": "acci_name",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#0996ce",
+              "#f58442",
+              "#5b6795",
+              "#abd46f",
+              "#f19c62",
+              "#8d355f",
+              "#8c3e64",
+              "#5b6795"
+            ]
+          }
+        },
+        "radius": {
+          "field": "acci_id",
+          "type": "quantitative",
+          "aggregate": "count",
+          "scale": {"type": "sqrt", "zero": true, "range": [120, 250]}
+        },
+        "tooltip": [
+          {"field": "acci_name", "type": "nominal", "title": "Accident Type"},
+          {
+            "field": "acci_id",
+            "type": "quantitative",
+            "aggregate": "count",
+            "title": "Accidents"
+          }
+        ]
+      },
+      "selection": {
+        "acciTypeSelection": {
+          "type": "single",
+          "fields": ["acci_name"],
+          "on": "click"
+        }
+      }
+    },
+    {
+      "title": "Accident Time Trend",
+      "width": 600,
+      "height": 300,
+      "transform": [
+        {"timeUnit": "yearmonth", "field": "acci_time", "as": "month"},
+        {"filter": {"selection": "emirateSelection"}},
+        {"filter": {"selection": "acciTypeSelection"}},
+        {
+          "aggregate": [
+            {"op": "count", "field": "acci_id", "as": "Accident_Count"}
+          ],
+          "groupby": ["month", "Emirate"]
+        }
+      ],
+      "mark": {"type": "line", "point": true, "tooltip": true},
+      "encoding": {
+        "x": {
+          "field": "month",
+          "type": "temporal",
+          "axis": {"format": "%b %Y", "title": "Month"}
+        },
+        "y": {
+          "field": "Accident_Count",
+          "type": "quantitative",
+          "title": "Accident Count"
+        },
+        "color": {
+          "field": "Emirate",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {"field": "month", "type": "temporal", "title": "Month"},
+          {
+            "field": "Accident_Count",
+            "type": "quantitative",
+            "title": "Accident Count"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
