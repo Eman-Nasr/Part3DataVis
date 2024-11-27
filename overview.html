@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
+    <p><strong>Description:</strong></p>
+    <p>The visualization features two area charts that use interactive brushing to enhance data exploration. The primary chart provides a detailed view of traffic incidents over various months and years, while the secondary chart enables users to select specific time periods for focused analysis.</p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
+  </div>
+  <hr>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "vconcat": [
+    {
+      "title": "Accidents by the month of the year in overview represent",
+      "width": 500,
+      "height": 300,
+      "data": {
+        "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/main/Traffic_Incidents.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+        }
+      },
+      "transform": [
+        {"timeUnit": "yearmonth", "field": "acci_time", "as": "year_month"},
+        {
+          "aggregate": [{"op": "count", "as": "count"}],
+          "groupby": ["year_month"]
+        }
+      ],
+      "mark": {"type": "area", "color": "#AE5271"},
+      "encoding": {
+        "x": {
+          "field": "year_month",
+          "type": "temporal",
+          "axis": {"format": "%B %Y"},
+          "scale": {"domain": {"param": "brush"}}
+        },
+        "y": {
+          "field": "count",
+          "type": "quantitative",
+          "title": "Number of Incidents"
+        }
+      }
+    },
+    {
+      "title": "Accidents by month of the year ",
+      "width": 500,
+      "height": 100,
+      "data": {
+        "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/main/Traffic_Incidents.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+        }
+      },
+      "transform": [
+        {"timeUnit": "yearmonth", "field": "acci_time", "as": "year_month"},
+        {
+          "aggregate": [{"op": "count", "as": "count"}],
+          "groupby": ["year_month"]
+        }
+      ],
+      "mark": {"type": "area", "color": "#AE5271"},
+      "params": [
+        {"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}
+      ],
+      "encoding": {
+        "x": {
+          "field": "year_month",
+          "type": "temporal",
+          "axis": {"format": "%B %Y"}
+        },
+        "y": {
+          "field": "count",
+          "type": "quantitative",
+          "title": "Number of Incidents"
+        }
+      }
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

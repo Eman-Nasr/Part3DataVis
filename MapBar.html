@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+  <style>
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(-50%);
+        }
+        40% {
+            transform: translateY(-70%);
+        }
+        60% {
+            transform: translateY(-60%);
+        }
+    }
+
+    </style>
+</head>
+<body>
+  
+  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 20px;">
+    <h3 style="margin-top: 5px; margin-bottom: 5px;"><strong>Description:</strong></h3>
+    <p>This visualization represents a map of the accidents that interact with a bar chart and line chart; the bar chart represents the number of accidents in each month, while the line chart represents the number of accidents over the hours.</p>
+    <h4 style="margin-bottom: 0px; padding-bottom: 0px;"><strong>Interaction:</strong></h4>
+    <p style="margin-top: 5px;">The map has an interval selection; it selects the accidents, and that reflects on both the bar and line graphs. also, The line chart has an interval selection, but that only select on the x access and that reflects on the map, and the bar and filter only accidents that happened in those hours, while the bar chart has a point selection that allows the user to select a month and that reflect on the map and line charts filter accidents that happen on those months only, user can also choose more that one nar by holding shift while selecting.</p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
+   
+  </div>
+  <h2>Interaction Map, Bar, And LineChart</h2>
+  <hr>
+  <h3 style="text-align: center">Accidents represented in map by Months</h3>
+
+
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  
+  "vconcat": [
+  
+    {
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/sbma44/uber-cities/master/geojson/dubai.geojson",
+            "format": {"type": "topojson", "feature": "states"}
+          },
+          "mark": {"type": "geoshape", "fill": "#f2f2f296", "stroke": "gray"},
+          
+          "width": 900,
+          "height": 700
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/refs/heads/main/Traffic_Incidents.csv",
+            "format": {
+              "type": "csv",
+              "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+            }
+          },
+          "transform": [
+            {"filter": "datum.acci_y > 0"},
+            {"filter": "datum.acci_x > 0"},
+            {"timeUnit": "month", "field": "acci_time", "as": "month"},
+            {"calculate": "hours(toDate(datum.acci_time))", "as": "hour"},
+            {"filter": {"param": "hour_filter"}},
+            {"calculate": "timeFormat(datum.month, '%B')", "as": "month_name"},
+            {"filter": {"param": "month_selection"}}
+          ],
+          "mark": {"type": "circle", "opacity": 0.5},
+          "width": 1000,
+          "height": 800,
+          "params": [
+            {
+              "name": "select",
+              "select": {"type": "interval", "fields": ["count"]}
+            }
+          ],
+          "encoding": {
+            "longitude": {"field": "acci_y", "type": "quantitative"},
+            "latitude": {"field": "acci_x", "type": "quantitative"},
+            "color": {
+              "condition": {
+                "param": "select",
+                "field": "month_name",
+                "type": "ordinal",
+                "scale": {
+                  "domain": [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+                  ],
+                  "range": [
+                    "#FFE5D5",
+                    "#ffc099",
+                    "#FFBB99",
+                    "#ffa166",
+                    "#ff8133",
+                    "#ff6200",
+                    "#cc4e00",
+                    "#993b00",
+                    "#662700",
+                    "#4d1d00",
+                    "#331400",
+                    "#000000"
+                  ]
+                },
+                "title": "Accident Density",
+                "legend": {"orient": "top", "title": "Month", "symbolSize": 20}
+              },
+              "value": "lightgray"
+            },
+            "tooltip": [
+              {"field": "acci_x", "type": "quantitative", "title": "Latitude"},
+              {"field": "acci_y", "type": "quantitative", "title": "Longitude"},
+              {
+                "field": "acci_time",
+                "type": "temporal",
+                "title": "Time of Accident"
+              },
+              {
+                "field": "acci_name",
+                "type": "nominal",
+                "title": "Incident Description"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "hconcat": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/refs/heads/main/Traffic_Incidents.csv",
+            "format": {
+              "type": "csv",
+              "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+            }
+          },
+          "transform": [
+            {"calculate": "hours(toDate(datum.acci_time))", "as": "hour"},
+            {"filter": {"param": "hour_filter"}},
+            {"filter": {"param": "select"}},
+            {"timeUnit": "month", "field": "acci_time", "as": "month"},
+            {
+              "aggregate": [{"op": "count", "as": "count"}],
+              "groupby": ["month"]
+            },
+            {"filter": "datum.count > 0"},
+            {"calculate": "timeFormat(datum.month, '%B')", "as": "month_name"}
+          ],
+          "title": "Accidents by Month",
+          "mark": "bar",
+          "width": 500,
+          "height": 500,
+          "params": [
+            {
+              "name": "month_selection",
+              "select": {
+                "type": "point",
+                "fields": ["month_name"],
+                "encodings": ["x"],
+                "toggle": "event.shiftKey"
+              }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "month_name",
+              "type": "ordinal",
+              "title": "Month",
+              "axis": {"labelAngle": 0},
+              "sort": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+              ]
+            },
+            "y": {
+              "field": "count",
+              "type": "quantitative",
+              "title": "Number of Accidents"
+            },
+            "color": {
+              "condition": {
+                "param": "month_selection",
+                "field": "month_name",
+                "type": "ordinal",
+                "scale": {
+                  "domain": [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+                  ],
+                  "range": [
+                    "#FFE5D5",
+                    "#FFD1B3",
+                    "#FFBB99",
+                    "#FFA377",
+                    "#FF8A54",
+                    "#FF7040",
+                    "#FF572D",
+                    "#FF3E1A",
+                    "#E63900",
+                    "#CC3300",
+                    "#B32E00",
+                    "#991900"
+                  ]
+                },
+                "legend": null
+              },
+              "value": "lightgray"
+            }
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/refs/heads/main/Traffic_Incidents.csv",
+            "format": {
+              "type": "csv",
+              "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+            }
+          },
+          "transform": [
+            {"filter": {"param": "select"}},
+            {"timeUnit": "month", "field": "acci_time", "as": "month"},
+            {"calculate": "timeFormat(datum.month, '%B')", "as": "month_name"},
+            {"filter": {"param": "month_selection"}},
+            {"calculate": "hours(toDate(datum.acci_time))", "as": "hour"},
+            {"timeUnit": "day", "field": "acci_time", "as": "day"},
+            {
+              "aggregate": [
+                {"op": "count", "field": "acci_time", "as": "count"}
+              ],
+              "groupby": ["hour"]
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "point": {"filled": true, "size": 100},
+            "strokeWidth": 3
+          },
+          "title": "Accidents by Hour of the Day",
+          "width": 500,
+          "height": 500,
+          "params": [
+            {
+              "name": "hour_filter",
+              "select": {"type": "interval", "encodings": ["x"]}
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "hour",
+              "type": "quantitative",
+              "title": "Hour of the Day",
+              "axis": {
+                "labelAngle": 0,
+                "tickCount": 24,
+                "labelOverlap": false,
+                "tickMinStep": 1
+              },
+              "scale": {"domain": [0, 23]}
+            },
+            "y": {
+              "field": "count",
+              "type": "quantitative",
+              "title": "Number of Accidents"
+            },
+            "color": {
+              "condition": {
+                "param": "hour_filter",
+                "value": "#FFA377",
+                "legend": null
+              },
+              "value": "lightgray"
+            },
+            "tooltip": [
+              {"field": "hour", "type": "quantitative", "title": "Hour"},
+              {
+                "field": "count",
+                "type": "quantitative",
+                "title": "Number of Accidents"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

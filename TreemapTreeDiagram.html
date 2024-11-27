@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
+    <p><strong>Description:</strong></p>
+    <p>1st visualization:  tree diagram provides a hierarchical overview of geographic regions, starting with the "United Arab Emirates" at the top level and branching down into emirates, then areas. It visualizes the structure in a tidy or cluster format, allowing users to explore relationships and hierarchical dependencies. 2nd Visualization: treemap illustrates the proportional distribution of accidents across different emirates and areas. Each rectangle's size represents the scaled count of accidents, providing an intuitive view of where incidents are concentrated. The hierarchical nesting reflects the emirates and their respective areas.   Interaction: Clicking on a node in the tree or a rectangle in the treemap highlights the selected region, enabling a focused view of the chosen emirate or area.</p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
+  </div>
+  <hr>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": "Tree diagram for the emirates and the sectors of each emirate",
+  "width": 1200,
+  "height": 600,
+  "padding": 5,
+  "signals": [
+    {"name": "labels", "value": true, "bind": {"input": "checkbox"}},
+    {
+      "name": "layout",
+      "value": "tidy",
+      "bind": {"input": "radio", "options": ["tidy", "cluster"]}
+    },
+    {
+      "name": "links",
+      "value": "diagonal",
+      "bind": {
+        "input": "select",
+        "options": ["line", "curve", "diagonal", "orthogonal"]
+      }
+    },
+    {
+      "name": "selected",
+      "value": null,
+      "on": [
+        {"events": "symbol:click", "update": "datum.id"},
+        {"events": "rect:click", "update": "datum.child || datum.parent"}
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "tree_hierarchy",
+      "values": [
+        {
+          "id": "United Arab Emirates",
+          "parent": null,
+          "y": 271.3235294117647,
+          "x": 0,
+          "depth": 0,
+          "children": 4
+        },
+        {
+          "id": "Dubai",
+          "parent": "United Arab Emirates",
+          "y": 132.35294117647058,
+          "x": 250,
+          "depth": 1,
+          "children": 9
+        },
+        {
+          "id": "Sharjah",
+          "parent": "United Arab Emirates",
+          "y": 291.17647058823525,
+          "x": 250,
+          "depth": 1,
+          "children": 1
+        },
+        {
+          "id": "Ajman",
+          "parent": "United Arab Emirates",
+          "y": 344.11764705882354,
+          "x": 250,
+          "depth": 1,
+          "children": 1
+        },
+        {
+          "id": "Abu Dhabi",
+          "parent": "United Arab Emirates",
+          "y": 410.2941176470588,
+          "x": 250,
+          "depth": 1,
+          "children": 2
+        },
+        {
+          "id": "Al Barsha",
+          "parent": "Dubai",
+          "y": 26.470588235294116,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Dubai South",
+          "parent": "Dubai",
+          "y": 52.94117647058823,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Deira",
+          "parent": "Dubai",
+          "y": 79.41176470588235,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Al Quoz",
+          "parent": "Dubai",
+          "y": 105.88235294117646,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Business Bay",
+          "parent": "Dubai",
+          "y": 132.35294117647058,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Bur Dubai",
+          "parent": "Dubai",
+          "y": 158.8235294117647,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Dubai Marina",
+          "parent": "Dubai",
+          "y": 185.2941176470588,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Downtown Dubai",
+          "parent": "Dubai",
+          "y": 211.76470588235293,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Jumeirah",
+          "parent": "Dubai",
+          "y": 238.23529411764704,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Sharjah City",
+          "parent": "Sharjah",
+          "y": 291.17647058823525,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Ajman City",
+          "parent": "Ajman",
+          "y": 344.11764705882354,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Al Ain",
+          "parent": "Abu Dhabi",
+          "y": 397.0588235294117,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        },
+        {
+          "id": "Al Dhafra Region",
+          "parent": "Abu Dhabi",
+          "y": 423.52941176470586,
+          "x": 500,
+          "depth": 2,
+          "children": 0
+        }
+      ],
+      "transform": [
+        {"type": "stratify", "key": "id", "parentKey": "parent"},
+        {
+          "type": "tree",
+          "method": {"signal": "layout"},
+          "size": [{"signal": "height - 150"}, {"signal": "width / 2 - 100"}],
+          "as": ["y", "x", "depth", "children"]
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "tree_hierarchy",
+      "transform": [
+        {"type": "treelinks"},
+        {
+          "type": "linkpath",
+          "orient": "horizontal",
+          "shape": {"signal": "links"}
+        }
+      ]
+    },
+    {
+      "name": "treemap_data",
+      "url": "https://raw.githubusercontent.com/Eman-Nasr/Part3DataVis/refs/heads/main/accidentsEmirates.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["Emirate", "Area", "acci_name"],
+          "ops": ["count"],
+          "as": ["count"]
+        },
+        {
+          "type": "formula",
+          "as": "scaled_count",
+          "expr": "pow(datum.count, 0.4)"
+        },
+        {"type": "formula", "as": "parent", "expr": "datum.Emirate"},
+        {"type": "formula", "as": "child", "expr": "datum.Area"},
+        {"type": "nest", "keys": ["parent", "child"]},
+        {
+          "type": "treemap",
+          "field": "scaled_count",
+          "sort": {"field": "value", "order": "descending"},
+          "size": [{"signal": "width / 2 - 50"}, {"signal": "height - 150"}],
+          "round": true,
+          "paddingInner": 2
+        }
+      ]
+    },
+    {
+      "name": "legend_data",
+      "values": [
+        {"label": "Al Barsha (Dubai)", "color": "#1E90FF", "index": 0},
+        {"label": "Dubai South (Dubai)", "color": "#4682B4", "index": 1},
+        {"label": "Deira (Dubai)", "color": "#5F9EA0", "index": 2},
+        {"label": "Al Quoz (Dubai)", "color": "#6495ED", "index": 3},
+        {"label": "Business Bay (Dubai)", "color": "#00BFFF", "index": 4},
+        {"label": "Bur Dubai (Dubai)", "color": "#87CEFA", "index": 5},
+        {"label": "Dubai Marina (Dubai)", "color": "#B0E0E6", "index": 6},
+        {"label": "Downtown Dubai (Dubai)", "color": "#ADD8E6", "index": 7},
+        {"label": "Jumeirah (Dubai)", "color": "#abe7e7", "index": 8},
+        {"label": "Sharjah City (Sharjah)", "color": "#ed7cac", "index": 9},
+        {"label": "Ajman City (Ajman)", "color": "#ffac62", "index": 10},
+        {"label": "Al Ain (Abu Dhabi)", "color": "#5d9d44", "index": 11},
+        {
+          "label": "Al Dhafra Region (Abu Dhabi)",
+          "color": "#88d15d",
+          "index": 12
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "treemap_data", "field": "Emirate"},
+      "range": {"scheme": "category10"}
+    },
+    {
+      "name": "colors",
+      "type": "ordinal",
+      "domain": [
+        "Al Barsha",
+        "Dubai South",
+        "Deira",
+        "Al Quoz",
+        "Business Bay",
+        "Bur Dubai",
+        "Dubai Marina",
+        "Downtown Dubai",
+        "Jumeirah",
+        "Sharjah City",
+        "Ajman City",
+        "Al Ain",
+        "Al Dhafra Region"
+      ],
+      "range": [
+        "#1E90FF",
+        "#4682B4",
+        "#5F9EA0",
+        "#6495ED",
+        "#00BFFF",
+        "#87CEFA",
+        "#B0E0E6",
+        "#ADD8E6",
+        "#abe7e7",
+        "#ed7cac",
+        "#FF8C00",
+        "#32CD32",
+        "#228B22"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {"data": "links"},
+      "encode": {
+        "update": {"path": {"field": "path"}, "stroke": {"value": "#ccc"}}
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "tree_hierarchy"},
+      "encode": {
+        "enter": {"size": {"value": 100}, "stroke": {"value": "#fff"}},
+        "update": {
+          "x": {"field": "x"},
+          "y": {"field": "y"},
+          "fill": [
+            {"test": "datum.id === selected", "value": "#a267b4"},
+            {"value": "#4682b4"}
+          ]
+        },
+        "hover": {"cursor": {"value": "pointer"}}
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree_hierarchy"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x"},
+          "y": {"field": "y"},
+          "dx": {"signal": "datum.children ? -10 : 10"},
+          "align": {"signal": "datum.children ? 'right' : 'left'"},
+          "baseline": {"value": "middle"},
+          "text": {"field": "id"},
+          "fontSize": {"value": 12},
+          "fill": {"value": "#333"}
+        },
+        "update": {"opacity": {"signal": "labels ? 1 : 0"}}
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "treemap_data"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "datum.x0 + width / 2 + 50"},
+          "y": {"field": "y0"},
+          "x2": {"signal": "datum.x1 + width / 2 + 50"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "color", "field": "child"},
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 1}
+        },
+        "update": {
+          "fill": [
+            {
+              "test": "datum.child === selected || datum.parent === selected || selected === 'United Arab Emirates'",
+              "value": "#a267b4"
+            },
+            {"signal": "scale('colors', datum.child)"}
+          ]
+        },
+        "hover": {
+          "fill": {"signal": "scale('colors', datum.child)"},
+          "fillOpacity": {"value": 0.8},
+          "tooltip": {
+            "signal": "{'Emirate': datum.parent, 'Area': datum.child, 'Accident Type': datum.acci_name, 'Accident Count': datum.count}"
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "encode": {"enter": {"x": {"value": 1230}, "y": {"value": 10}}},
+      "marks": [
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {"value": 0},
+              "y": {"value": 0},
+              "text": {"value": "Areas"},
+              "fontSize": {"value": 14},
+              "fontWeight": {"value": "bold"},
+              "fill": {"value": "#000"}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {"data": "legend_data"},
+          "encode": {
+            "enter": {
+              "x": {"value": 0},
+              "y": {"signal": "datum.index * 20 + 20"},
+              "shape": {"value": "circle"},
+              "size": {"value": 200},
+              "fill": {"field": "color"}
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {"data": "legend_data"},
+          "encode": {
+            "enter": {
+              "x": {"value": 20},
+              "y": {"signal": "datum.index * 20 + 20"},
+              "text": {"field": "label"},
+              "fontSize": {"value": 12},
+              "baseline": {"value": "middle"},
+              "fill": {"value": "#000"}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "reset_button",
+      "encode": {
+        "enter": {
+          "x": {"value": 1230},
+          "y": {"value": 470},
+          "width": {"value": 120},
+          "height": {"value": 40}
+        }
+      },
+      "marks": [
+        {
+          "type": "rect",
+          "encode": {
+            "enter": {
+              "width": {"value": 120},
+              "height": {"value": 40},
+              "fill": {"value": "gray"},
+              "cursor": {"value": "pointer"}
+            },
+            "hover": {"fill": {"value": "lightgray"}}
+          },
+          "on": [{"events": "click", "update": "selected = null"}]
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {"value": 60},
+              "y": {"value": 20},
+              "text": {"value": "Reset"},
+              "align": {"value": "center"},
+              "baseline": {"value": "middle"},
+              "fill": {"value": "white"},
+              "fontSize": {"value": 14}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 750},
+          "y": {"value": 80},
+          "text": {"value": "Dubai Marina"},
+          "fontSize": {"value": 20},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 915},
+          "y": {"value": 100},
+          "text": {"value": "Downtown Dubai"},
+          "fontSize": {"value": 15},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 1050},
+          "y": {"value": 90},
+          "text": {"value": "Al Quoz"},
+          "fontSize": {"value": 20},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 750},
+          "y": {"value": 380},
+          "text": {"value": "Al Barsha"},
+          "fontSize": {"value": 25},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 750},
+          "y": {"value": 230},
+          "text": {"value": "Deira"},
+          "fontSize": {"value": 25},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 930},
+          "y": {"value": 260},
+          "text": {"value": "Dubai South"},
+          "fontSize": {"value": 20},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 930},
+          "y": {"value": 390},
+          "text": {"value": "Business Bay"},
+          "fontSize": {"value": 20},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 1065},
+          "y": {"value": 420},
+          "text": {"value": "Jumeirah"},
+          "fontSize": {"value": 16},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 1065},
+          "y": {"value": 300},
+          "text": {"value": "Bur Dubai"},
+          "fontSize": {"value": 17},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 1152},
+          "y": {"value": 430},
+          "text": {"value": "Ajman City"},
+          "fontSize": {"value": 10},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 1162},
+          "y": {"value": 210},
+          "text": {"value": "Sharjah City"},
+          "fontSize": {"value": 13},
+          "fill": {"value": "black"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

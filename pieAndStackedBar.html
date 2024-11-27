@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
+    <p><strong>Description:</strong></p>
+    <p>This visualization includes:
+      1. A pie chart showing the distribution of traffic accidents across different months, with each color representing a specific month. A bar chart displaying the number of accidents by day of the week, with a gradient indicating the day of the month (1–30).</p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
+  </div>
+  <hr>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "hconcat": [
+    {
+      "title": "Month of the year",
+      "width": 400,
+      "height": 400,
+      "data": {
+        "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/refs/heads/main/Traffic_Incidents.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+        }
+      },
+      "transform": [
+        {"calculate": "timeFormat(datum.acci_time, '%B')", "as": "month"},
+        {
+          "aggregate": [
+            {"op": "count", "field": "acci_id", "as": "num_accidents"}
+          ],
+          "groupby": ["month"]
+        }
+      ],
+      "mark": "arc",
+      "encoding": {
+        "theta": {"field": "num_accidents", "type": "quantitative"},
+        "color": {
+          "field": "month",
+          "type": "nominal",
+          "title": "Month",
+          "scale": {
+            "domain": ["March", "April", "June", "July", "August", "September"],
+            "range": [
+              "#1f77b4",
+              "#ff7f0e",
+              "#2ca02c",
+              "#d62728",
+              "#9467bd",
+              "#8c565b"
+            ]
+          }
+        },
+        "tooltip": [
+          {"field": "month", "type": "nominal", "title": "Month"},
+          {
+            "field": "num_accidents",
+            "type": "quantitative",
+            "title": "Number of Accidents"
+          }
+        ]
+      },
+      "selection": {
+        "month_select": {
+          "type": "single",
+          "fields": ["month"],
+          "on": "click",
+          "clear": false,
+          "empty": "none"
+        }
+      }
+    },
+    {
+      "title": "Accidents by the day of the week in each month",
+      "width": 800,
+      "height": 400,
+      "data": {
+        "url": "https://raw.githubusercontent.com/sheriefAbdallah/CS318/refs/heads/main/Traffic_Incidents.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"acci_time": "date:'%d/%m/%Y %H:%M:%S'"}
+        }
+      },
+      "transform": [
+        {"calculate": "timeFormat(datum.acci_time, '%B')", "as": "month"},
+        {"calculate": "timeFormat(datum.acci_time, '%A')", "as": "day_of_week"},
+        {
+          "calculate": "toNumber(timeFormat(datum.acci_time, '%e'))",
+          "as": "day_of_month"
+        },
+        {"filter": {"param": "month_select"}},
+        {
+          "filter": "datum.day_of_month <= (datum.month == 'February' ? 28 : (datum.month == 'April' || datum.month == 'June' || datum.month == 'September' || datum.month == 'November' ? 30 : 31))"
+        },
+        {
+          "aggregate": [
+            {"op": "count", "field": "acci_id", "as": "num_accidents"}
+          ],
+          "groupby": ["day_of_week", "day_of_month", "month"]
+        }
+      ],
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "day_of_week",
+          "type": "ordinal",
+          "title": "Day of the Week",
+          "axis": {"labelAngle": 0},
+          "sort": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        },
+        "y": {
+          "field": "num_accidents",
+          "type": "quantitative",
+          "title": "Number of Accidents"
+        },
+        "color": {
+          "field": "day_of_month",
+          "type": "quantitative",
+          "title": "Date of the Month",
+          "scale": {
+            "scheme": {
+              "signal": "month_select.month == 'March' ? 'blues' : month_select.month == 'April' ? 'oranges' : month_select.month == 'June' ? 'greens' : month_select.month == 'July' ? 'reds' : month_select.month == 'August' ? 'purples' : 'browns'"
+            },
+            "domain": [1, 31]
+          },
+          "legend": {"title": "Day of Month (Light to Dark)"}
+        },
+        "tooltip": [
+          {
+            "field": "day_of_week",
+            "type": "nominal",
+            "title": "Day of the Week"
+          },
+          {
+            "field": "day_of_month",
+            "type": "quantitative",
+            "title": "Date of the Month"
+          },
+          {
+            "field": "num_accidents",
+            "type": "quantitative",
+            "title": "Number of Accidents"
+          },
+          {"field": "month", "type": "nominal", "title": "Month"}
+        ]
+      }
+    }
+  ],
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
