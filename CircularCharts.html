@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 <body>
+
   <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
     <p><strong>Description:</strong></p>
     <p>
@@ -27,127 +28,140 @@
   },
   "vconcat": [
     {
-      "title": "Accidents by Emirate",
-      "width": 400,
-      "height": 400,
-      "mark": {"type": "arc", "tooltip": true},
-      "encoding": {
-        "theta": {
-          "field": "acci_id",
-          "type": "quantitative",
-          "aggregate": "count"
-        },
-        "color": {
-          "condition": {
-            "param": "emirateSelection",
-            "field": "Emirate",
-            "type": "nominal",
-            "scale": {
-              "range": [
-                "#0996ce",
-                "#f58442",
-                "#5b6795",
-                "#abd46f",
-                "#f19c62",
-                "#8d355f",
-                "#8c3e64",
-                "#293256"
-              ]
+      "hconcat": [
+        {
+          "title": "Accidents by Emirate",
+          "width": 400,
+          "height": 400,
+          "mark": {"type": "arc", "tooltip": true},
+          "encoding": {
+            "theta": {
+              "field": "acci_id",
+              "type": "quantitative",
+              "aggregate": "count"
             },
-            "legend": {"orient": "top", "title": "Emirate", "symbolSize": 20}
+            "color": {
+              "condition": {
+                "param": "emirateSelection",
+                "field": "Emirate",
+                "type": "nominal",
+                "scale": {
+                  "range": [
+                    "#0996ce",
+                    "#f58442",
+                    "#5b6795",
+                    "#abd46f",
+                    "#f19c62",
+                    "#8d355f",
+                    "#8c3e64",
+                    "#293256"
+                  ]
+                },
+                "legend": {
+                  "orient": "top",
+                  "title": "Emirate",
+                  "symbolSize": 20
+                }
+              },
+              "value": "lightgray"
+            },
+            "tooltip": [
+              {"field": "Emirate", "type": "nominal", "title": "Emirate"},
+              {
+                "field": "acci_id",
+                "type": "quantitative",
+                "aggregate": "count",
+                "title": "Total Accidents"
+              }
+            ]
           },
-          "value": "lightgray"
-        },
-        "tooltip": [
-          {"field": "Emirate", "type": "nominal", "title": "Emirate"},
-          {
-            "field": "acci_id",
-            "type": "quantitative",
-            "aggregate": "count",
-            "title": "Total Accidents"
-          }
-        ]
-      },
-      "transform": [{"filter": {"selection": "acciTypeSelection"}}],
-      "selection": {
-        "emirateSelection": {
-          "type": "multi",
-          "fields": ["Emirate"],
-          "on": "click",
-          "toggle": "event.shiftKey ? true : false"
-        }
-      }
-    },
-    {
-      "title": "Accident Types in Selected Emirate",
-      "width": 400,
-      "height": 400,
-      "transform": [{"filter": {"selection": "emirateSelection"}}],
-      "mark": {"type": "arc", "innerRadius": 20, "stroke": "#fff"},
-      "encoding": {
-        "theta": {
-          "field": "acci_id",
-          "type": "quantitative",
-          "aggregate": "count",
-          "stack": true
-        },
-        "color": {
-          "condition": {
-            "param": "acciTypeSelection",
-            "field": "acci_name",
-            "type": "nominal",
-            "scale": {
-              "range": [
-                "#0996ce",
-                "#f58442",
-                "#5b6795",
-                "#abd46f",
-                "#f19c62",
-                "#8d355f",
-                "#8c3e64",
-                "#293256",
-                "#ffcc00",
-                "#ff6600",
-                "#99cc00",
-                "#0099cc",
-                "#9966ff",
-                "#cc0066",
-                "#66ccff",
-                "#66ff66"
-              ]
-            },
-            "legend": {
-              "orient": "right",
-              "title": "Accident Type",
-              "symbolSize": 20
+          "transform": [{"filter": {"selection": "acciTypeSelection"}}],
+          "selection": {
+            "emirateSelection": {
+              "type": "multi",
+              "fields": ["Emirate"],
+              "on": "click",
+              "toggle": "event.shiftKey ? true : false"
             }
-          },
-          "value": "lightgray"
-        },
-        "radius": {
-          "field": "acci_id",
-          "type": "quantitative",
-          "aggregate": "count",
-          "scale": {"type": "sqrt", "zero": true, "range": [120, 250]}
-        },
-        "tooltip": [
-          {"field": "acci_name", "type": "nominal", "title": "Accident Type"},
-          {
-            "field": "acci_id",
-            "type": "quantitative",
-            "aggregate": "count",
-            "title": "Accidents"
           }
-        ]
-      },
-      "selection": {
-        "acciTypeSelection": {
-          "type": "multi",
-          "fields": ["acci_name"],
-          "on": "click",
-          "toggle": "event.shiftKey ? true : false"
+        },
+        {
+          "title": "Accident Types in Selected Emirate",
+          "width": 400,
+          "height": 400,
+          "transform": [{"filter": {"selection": "emirateSelection"}}],
+          "mark": {"type": "arc", "innerRadius": 20, "stroke": "#fff"},
+          "encoding": {
+            "theta": {
+              "field": "acci_id",
+              "type": "quantitative",
+              "aggregate": "count",
+              "stack": true
+            },
+            "color": {
+              "condition": {
+                "param": "acciTypeSelection",
+                "field": "acci_name",
+                "type": "nominal",
+                "scale": {
+                  "range": [
+                    "#0996ce",
+                    "#f58442",
+                    "#5b6795",
+                    "#abd46f",
+                    "#f19c62",
+                    "#8d355f",
+                    "#8c3e64",
+                    "#293256",
+                    "#ffcc00",
+                    "#ff6600",
+                    "#99cc00",
+                    "#0099cc",
+                    "#9966ff",
+                    "#cc0066",
+                    "#66ccff",
+                    "#66ff66"
+                  ]
+                },
+                "legend": {
+                  "orient": "right",
+                  "title": "Accident Type",
+                  "symbolSize": 20
+                }
+              },
+              "value": "lightgray"
+            },
+            "radius": {
+              "field": "acci_id",
+              "type": "quantitative",
+              "aggregate": "count",
+              "scale": {"type": "sqrt", "zero": true, "range": [120, 250]}
+            },
+            "tooltip": [
+              {
+                "field": "acci_name",
+                "type": "nominal",
+                "title": "Accident Type"
+              },
+              {
+                "field": "acci_id",
+                "type": "quantitative",
+                "aggregate": "count",
+                "title": "Accidents"
+              }
+            ]
+          },
+          "selection": {
+            "acciTypeSelection": {
+              "type": "multi",
+              "fields": ["acci_name"],
+              "on": "click",
+              "toggle": "event.shiftKey ? true : false"
+            }
+          }
         }
-      }
+      ],
+      "resolve": {"scale": {"color": "independent"}}
     },
     {
       "title": "Accident Time Trend",
@@ -185,11 +199,14 @@
             "title": "Accident Count"
           }
         ]
-      }
+      },
+      "config": {}
     }
   ],
-  "resolve": {"scale": {"color": "independent"}},
-  "config": {}
+  "spacing": 50,
+  "config": {
+    "view": {"align": "center", "continuousWidth": 600, "continuousHeight": 400}
+  }
 };
     vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
