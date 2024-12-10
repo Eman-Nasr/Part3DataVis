@@ -118,7 +118,14 @@
             display: flex;
             flex-direction: column;
             justify-content: center; /* Center content vertically */
+            text-align: left; /* Aligns all text to the left */
             
+        }
+
+        .text-wrapper h1 {
+        text-align: center; /* Centers the h1 */
+        font-size: 24px; /* Adjust font size for the h1 */
+        margin-bottom: 15px; /* Adds spacing below the h1 */
         }
         
         .tabcontent p {
@@ -135,6 +142,22 @@
             margin-right: 90px; /* Shifts the image a little to the left */
             object-fit: cover; /* Ensures the image covers the area without distortion */
         }
+
+        .text-wrapper ul {
+            list-style-type: disc; /* Adds a bullet point before each item */
+            padding-left: 20px; /* Adds some space between the list and the left margin */
+        }
+
+        .text-wrapper li {
+            margin-bottom: 10px; /* Adds space between list items */
+            line-height: 1.6; /* Improves readability */
+            font-size: 16px; /* Adjusts font size for clarity */
+        }
+
+        .text-wrapper strong {
+            color: #333; /* Makes the bold headings stand out */
+        }
+
     </style>
 </head>
 <body>
@@ -154,11 +177,32 @@
         </div>
       
         <div id="CircularCharts" class="tabcontent">
-          <img src="images/library.jpg" alt="Circular Charts">
-          <div class="text-wrapper">
-            <p>Our World Class Library stands at the heart of our academic ecosystem, offering a sanctuary for scholars and a treasure trove of knowledge. With an extensive collection that spans thousands of volumes, including rare manuscripts, digital resources, and scholarly journals, our library fosters a rich environment for academic exploration and research. State-of-the-art reading rooms, study areas, and technology-enabled learning spaces support individual study and collaborative projects, making our library an invaluable resource for students aspiring to excel in their academic pursuits.</p>
+            <img src="images/basketball.webp" alt="CircularCharts">
+            <div class="text-wrapper">
+              <h1>Circular Charts</h1>
+              <h4>Description:</h4>
+              <ul>
+                <li>
+                  <strong>1. Accidents by Emirate (Pie Chart):</strong>
+                  This visualization offers a pie chart breakdown of the total number of accidents by Emirate. 
+                  Users can interact with the pie chart by clicking on a specific Emirate segment. 
+                  This interaction filters the other visualizations to reflect data pertinent to the selected Emirate.
+                </li>
+                <li>
+                  <strong>2. Accident Types in Selected Emirate (Nested Pie Chart):</strong>
+                  This visualization tracks the breakdown of different types of accidents within a selected Emirate 
+                  using a nested pie chart. Like the first visualization, clicking on a segment allows users to 
+                  focus on specific accident types, influencing data shown in other components.
+                </li>
+                <li>
+                  <strong>3. Accident Trends Over Time (Line Chart):</strong>
+                  A time trend line chart displays changes in accident counts over time, segmented by month and filtered 
+                  by selected Emirates or accident types. This chart allows users to view trends over time and identify patterns.
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+          
       
         <div id="HeatMapAreaChart" class="tabcontent">
           <img src="images/basketball.webp" alt="Heatmap Area Chart">
