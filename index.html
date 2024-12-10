@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .facility{
+        .visualization{
             width: 960px; /* Fixed width for the .facility container */
             margin: 0 auto; /* Centers the container */
             text-align: center;
             padding-top: 100px;
         }
-        .facility-col {
+        .visualization-col {
             display: flex; /* Enables Flexbox */
             align-items: center; /* Vertically centers the content in the container */
             justify-content: space-between; /* Spaces out the child elements */
@@ -20,11 +20,11 @@
             margin-bottom: 5%;
             text-align: left;
         }
-        .facility-col img{
+        .visualization-col img{
             width: 100%;
             border-radius: 10px;
         }
-        .facility-col p {
+        .visualization-col p {
             width: 45%; /* Adjusts the width of the paragraph */
             padding: 15px;
             font-size: 16px;
@@ -33,7 +33,7 @@
             color:var(--heading-color);
             margin-bottom: 20px;
         }
-        .facility-col img {
+        .visualization-col img {
             width: 45%; /* Adjusts the width of the image */
             height: auto; /* Maintains the aspect ratio */
             border-radius: 10px;
@@ -125,41 +125,70 @@
 </head>
 <body>
 
-<section class="facility">
-  <h1>Our Facilities</h1>
-  <p>Discover the state-of-the-art facilities that make our academy a premier destination for learning and growth.</p>
-  
-  <div class="facility-tabs">
-      <button class="tablinks" onclick="openFacility('Library')">World Class Library</button>
-      <button class="tablinks" onclick="openFacility('Playground')">Largest Playground</button>
-      <button class="tablinks" onclick="openFacility('Cafeteria')">Tasty and Healthy Food</button>
-  </div>
-
-  
-  <div id="Library" class="tabcontent">
-    <img src="images/library..jpg" alt="Library">
-    <div class="text-wrapper">
-      <p>Our World Class Library stands at the heart of our academic ecosystem, offering a sanctuary for scholars and a treasure trove of knowledge. With an extensive collection that spans thousands of volumes, including rare manuscripts, digital resources, and scholarly journals, our library fosters a rich environment for academic exploration and research. State-of-the-art reading rooms, study areas, and technology-enabled learning spaces support individual study and collaborative projects, making our library an invaluable resource for students aspiring to excel in their academic pursuits.</p>
-    </div>
+    <section class="visualization">
+        <h1>Our Visualizations</h1>
+        <p>Discover the state-of-the-art facilities that make our academy a premier destination for learning and growth.</p>
       
-  </div>
-
-  <div id="Playground" class="tabcontent">
-    <img src="images/basketball.webp" alt="Playground">
-    <div class="text-wrapper">
-      <p>The Largest Playground on campus is not just an outdoor area but a comprehensive facility designed to promote physical well-being and teamwork among students. Equipped with advanced sports equipment, various courts, and fields catering to a wide range of sports such as soccer, basketball, and tennis, it offers a dynamic space for students to engage in physical activity and hone their athletic skills. This extensive playground serves as a breeding ground for discipline, resilience, and camaraderie, essential qualities for personal and professional success.</p>
-     </div>
+        <div class="visualization-tabs">
+          <button class="tablinks" onclick="openFacility('CircularCharts')">Circular Charts</button>
+          <button class="tablinks" onclick="openFacility('HeatMapAreaChart')">Heatmap Area Chart</button>
+          <button class="tablinks" onclick="openFacility('MapBar')">Map, Line, and Bar Chart</button>
+          <button class="tablinks" onclick="openFacility('Overview')">Overview</button>
+          <button class="tablinks" onclick="openFacility('PieAndStackedBar')">Pie and Stacked Bar</button>
+          <button class="tablinks" onclick="openFacility('TreemapTreeDiagram')">Treemap and Tree Diagram</button>
+          <button class="tablinks" onclick="openFacility('Weather')">Weather</button>
+        </div>
       
-  </div>
-
-  <div id="Cafeteria" class="tabcontent">
-    <img src="images/cafeteria.jpg" alt="Cafeteria">
-    <div class="text-wrapper">
-      <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
-    </div>
+        <div id="CircularCharts" class="tabcontent">
+          <img src="images/library.jpg" alt="Circular Charts">
+          <div class="text-wrapper">
+            <p>Our World Class Library stands at the heart of our academic ecosystem, offering a sanctuary for scholars and a treasure trove of knowledge. With an extensive collection that spans thousands of volumes, including rare manuscripts, digital resources, and scholarly journals, our library fosters a rich environment for academic exploration and research. State-of-the-art reading rooms, study areas, and technology-enabled learning spaces support individual study and collaborative projects, making our library an invaluable resource for students aspiring to excel in their academic pursuits.</p>
+          </div>
+        </div>
       
-  </div>
-</section>
+        <div id="HeatMapAreaChart" class="tabcontent">
+          <img src="images/basketball.webp" alt="Heatmap Area Chart">
+          <div class="text-wrapper">
+            <p>The Largest Playground on campus is not just an outdoor area but a comprehensive facility designed to promote physical well-being and teamwork among students. Equipped with advanced sports equipment, various courts, and fields catering to a wide range of sports such as soccer, basketball, and tennis, it offers a dynamic space for students to engage in physical activity and hone their athletic skills. This extensive playground serves as a breeding ground for discipline, resilience, and camaraderie, essential qualities for personal and professional success.</p>
+          </div>
+        </div>
+      
+        <div id="MapBar" class="tabcontent">
+          <img src="images/cafeteria.jpg" alt="Map, Line, and Bar Chart">
+          <div class="text-wrapper">
+            <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+          </div>
+        </div>
+      
+        <div id="Overview" class="tabcontent">
+          <img src="images/cafeteria.jpg" alt="Overview">
+          <div class="text-wrapper">
+            <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+          </div>
+        </div>
+      
+        <div id="PieAndStackedBar" class="tabcontent">
+          <img src="images/cafeteria.jpg" alt="Pie and Stacked Bar">
+          <div class="text-wrapper">
+            <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+          </div>
+        </div>
+      
+        <div id="TreemapTreeDiagram" class="tabcontent">
+          <img src="images/cafeteria.jpg" alt="Treemap and Tree Diagram">
+          <div class="text-wrapper">
+            <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+          </div>
+        </div>
+      
+        <div id="Weather" class="tabcontent">
+          <img src="images/cafeteria.jpg" alt="Weather">
+          <div class="text-wrapper">
+            <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+          </div>
+        </div>
+      </section>
+      
 <script>
     // Enhance professionalism with a more efficient and structured approach
     
