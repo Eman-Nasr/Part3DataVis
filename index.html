@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
         .visualization{
-            width: 960px; /* Fixed width for the .facility container */
+            width: 1200px; /* Fixed width for the .facility container */
             margin: 0 auto; /* Centers the container */
             text-align: center;
             padding-top: 100px;
@@ -41,8 +41,16 @@
         }
         
         
-        
-        
+        .visualization-tabs {
+        display: flex; /* Ensures all buttons are in a single horizontal row */
+        justify-content: center; /* Centers the buttons */
+        border-bottom: 0px solid gray; /* Adds a line under the tabs */
+        background: #f1f1f19c; /* Light background for the tabs */
+        overflow-x: auto; /* Enables horizontal scrolling if there are too many tabs */
+        white-space: nowrap; /* Prevents wrapping to the next line */
+    
+        }
+                
         
         
         
@@ -85,10 +93,16 @@
             padding: 14px 16px;
             transition: 0.3s;
             font-size: 17px;
+            border-right: 1px solid gray; /* Adds a gray vertical line between buttons */
+
         }
         
+        .tablinks:last-child {
+        border-right: none; /* Removes the line for the last tab */
+        }
+
         .tablinks:hover {
-            background-color: #ddd;
+        background-color: #ddd;
         }
         
         .tabcontent {
