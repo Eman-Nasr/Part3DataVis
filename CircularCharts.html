@@ -7,13 +7,33 @@
 </head>
 <body>
 
-  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
-    <p><strong>Description:</strong></p>
-    <p>
-      1st visualization: Accidents by Emirate (Pie Chart): This visualization offers a pie chart breakdown of the total number of accidents by Emirate. Users can interact with the pie chart by clicking on a specific Emirate segment. This interaction filters the other visualizations to reflect data pertinent to the selected Emirate. 2nd visualization: Accident Types in Selected Emirate (Pie Chart): : This visualization tracks the breakdown of different types of accidents within a selected Emirate using a nested pie chart. Like the first visualization, clicking on a segment allows users to focus on specific accident types, influencing data shown in other components. 3rd visualization: A time trend line chart that displays changes in accident counts over time, segmented by month and filtered by selected Emirates or accident types. This chart allows users to view trends over time.
+  <div style="position: relative; padding: 20px; border: 2px solid #1E293B; border-radius: 12px; background-color: #F8FAFC; width: 60%; margin-bottom: 25px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-top: 5px; margin-bottom: 15px; font-family: 'Arial', sans-serif; font-size: 18px; color: #334155; font-weight: bold;">
+        <strong>Description:</strong>
+    </h3>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        1st visualization: Accidents by Emirate (Pie Chart): This visualization offers a pie chart breakdown of the total number of accidents by Emirate. Users can interact with the pie chart by clicking on a specific Emirate segment. This interaction filters the other visualizations to reflect data pertinent to the selected Emirate.
     </p>
-    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
-  </div>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        2nd visualization: Accident Types in Selected Emirate (Pie Chart): This visualization tracks the breakdown of different types of accidents within a selected Emirate using a nested pie chart. Like the first visualization, clicking on a segment allows users to focus on specific accident types, influencing data shown in other components.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        3rd visualization: A time trend line chart that displays changes in accident counts over time, segmented by month and filtered by selected Emirates or accident types. This chart allows users to view trends over time.
+    </p>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Interaction:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Users can interact with the pie charts by selecting specific segments. For the first pie chart, clicking on a segment filters the second pie chart and the time trend line chart to display data related to the selected Emirate. Similarly, selecting a segment in the second pie chart refines the time trend line chart further to focus on specific accident types.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        For the time trend line chart, users can explore changes in accident counts over time by interacting with the filtered data from the pie charts, observing trends across selected months or accident categories.
+    </p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #1E293B;"></div>
+</div>
+
+
+
   <hr>
   <div id="vis"/>
   <script>

@@ -9,7 +9,7 @@
             width: 1200px; /* Fixed width for the .facility container */
             margin: 0 auto; /* Centers the container */
             text-align: center;
-            padding-top: 100px;
+            padding-top: 50px;
         }
         .visualization-col {
             display: flex; /* Enables Flexbox */
@@ -158,6 +158,24 @@
             color: #333; /* Makes the bold headings stand out */
         }
 
+    .linked-class-button {
+        background-color: #1E293B; /* Dark slate background */
+        color: #F8FAFC; /* Light text color */
+        border: none; /* No border */
+        padding: 10px 20px; /* Padding for comfortable click area */
+        font-size: 16px; /* Readable font size */
+        font-family: 'Arial', sans-serif; /* Cohesive font */
+        cursor: pointer; /* Indicate interactivity */
+        border-radius: 5px; /* Smooth rounded corners */
+        margin-top: 15px; /* Adds space above the button */
+        transition: background-color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .linked-class-button:hover {
+        background-color: #334155; /* Slightly lighter shade for hover */
+    }
+
+
     </style>
 </head>
 <body>
@@ -186,6 +204,11 @@
                     <li><strong>2. Accident Types in Selected Emirate (Nested Pie Chart):</strong> This visualization tracks the breakdown of different types of accidents within a selected Emirate using a nested pie chart. Like the first visualization, clicking on a segment allows users to focus on specific accident types, influencing data shown in other components.</li>
                     <li><strong>3. Accident Trends Over Time (Line Chart):</strong> A time trend line chart displays changes in accident counts over time, segmented by month and filtered by selected Emirates or accident types. This chart allows users to view trends over time and identify patterns.</li>
                 </ul>
+                <button class="linked-class-button" onclick="window.open('CircularCharts.html', '_blank');">
+                    View Visualization
+                </button>
+                
+                
             </div>
         </div>
 
@@ -206,6 +229,9 @@
                   This visualization offers a area chart visualization tracks the total number of traffic events over time, broken down by incident type. 
                 </li>
               </ul>
+              <button class="linked-class-button" onclick="window.open('HeatMapAreaChart.html', '_blank');">
+                View Visualization
+            </button>
           </div>
 
         </div>
@@ -229,6 +255,9 @@
                   The line chart represents the number of accidents over the hours and allowing to have interaction by the selecting over the x axis and that filters the map and bar chart.
                 </li>
               </ul>
+              <button class="linked-class-button" onclick="window.open('MapBar.html', '_blank');">
+                View Visualization
+            </button>
           </div>
         </div>
 
@@ -248,6 +277,9 @@
                 </li>
                 
               </ul>
+              <button class="linked-class-button" onclick="window.open('Overview.html', '_blank');">
+                View Visualization
+            </button>
             </div>
         </div>
 
@@ -260,6 +292,9 @@
                 <li><strong>1. pie chart:</strong> A pie chart showing the distribution of traffic accidents across different months, with each color representing a specific month. This allows users to identify the proportion of accidents that occur in each month and compare trends between months. </li> <li><strong>2. bar chart:</strong> displays the number of accidents by the day of the week for each month. The gradient within each bar indicates the day of the month (1–30), providing deeper insights into accident patterns. This helps in identifying specific days or weeks with higher occurrences of accidents. </li>
                     
                 </ul>
+                <button class="linked-class-button" onclick="window.open('PieAndStackedBar.html', '_blank');">
+                    View Visualization
+                </button>
             </div>
         </div>
 
@@ -273,6 +308,9 @@
                     <li><strong>2. Treemap:</strong>  illustrates the proportional distribution of accidents across different emirates and areas. Each rectangle's size represents the scaled count of accidents, providing an intuitive view of where incidents are concentrated. The hierarchical nesting reflects the emirates and their respective areas. Interaction: Clicking on a node in the tree or a rectangle in the treemap highlights the selected region, enabling a focused view of the chosen emirate or area.</li>
                     
                 </ul>
+                <button class="linked-class-button" onclick="window.open('TreemapTreeDiagram.html', '_blank');">
+                    View Visualization
+                </button>
             </div>
         </div>
 
@@ -280,6 +318,9 @@
             <img src="images/cafeteria.jpg" alt="Weather">
             <div class="text-wrapper">
                 <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+                <button class="linked-class-button" onclick="window.open('Weather.html', '_blank');">
+                    View Visualization
+                </button>
             </div>
         </div>
     </section>

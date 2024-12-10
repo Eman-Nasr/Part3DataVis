@@ -6,12 +6,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 <body>
-  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
-    <p><strong>Description:</strong></p>
-    <p>This visualization includes:
-      1. A pie chart showing the distribution of traffic accidents across different months, with each color representing a specific month. A bar chart displaying the number of accidents by day of the week, with a gradient indicating the day of the month (1–30).</p>
-    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
-  </div>
+  <div style="position: relative; padding: 20px; border: 2px solid #1E293B; border-radius: 12px; background-color: #F8FAFC; width: 60%; margin-bottom: 25px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-top: 5px; margin-bottom: 15px; font-family: 'Arial', sans-serif; font-size: 18px; color: #334155; font-weight: bold;">
+        <strong>Description:</strong>
+    </h3>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        1. A pie chart showing the distribution of traffic accidents across different months, with each color representing a specific month.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        2. A bar chart displaying the number of accidents by day of the week, with a gradient indicating the day of the month (1–30).
+    </p>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Interaction:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Users can interact with the pie chart by clicking on specific segments, filtering the bar chart to show data relevant to the selected month. This helps users understand the relationship between accident distribution by month and their occurrences by day of the week.
+    </p>
+    
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #1E293B;"></div>
+</div>
   <hr>
   <div id="vis"/>
   <script>

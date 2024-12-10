@@ -6,11 +6,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 <body>
-  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
-    <p><strong>Description:</strong></p>
-    <p>The visualization features two area charts that use interactive brushing to enhance data exploration. The primary chart provides a detailed view of traffic incidents over various months and years, while the secondary chart enables users to select specific time periods for focused analysis.</p>
-    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
-  </div>
+  <div style="position: relative; padding: 20px; border: 2px solid #1E293B; border-radius: 12px; background-color: #F8FAFC; width: 60%; margin-bottom: 25px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-top: 5px; margin-bottom: 15px; font-family: 'Arial', sans-serif; font-size: 18px; color: #334155; font-weight: bold;">
+        <strong>Description:</strong>
+    </h3>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        1st visualization: Overview Area Chart: This visualization provides a high-level view of traffic incidents over various timeframes, offering an initial exploration of patterns and trends.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        2nd visualization: Area Chart for Accidents by Month and Year: This visualization gives a detailed breakdown of accidents over specific months and years, allowing for granular analysis of traffic incidents over time.
+    </p>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Interaction:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Users can interact with the area charts through brushing. By selecting a specific range in the overview chart, users can focus on particular time periods, which updates the detailed chart to reflect more focused data. This interaction enables precise exploration of traffic incident patterns and trends.
+    </p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #1E293B;"></div>
+</div>
+
   <hr>
   <div id="vis"/>
   <script>

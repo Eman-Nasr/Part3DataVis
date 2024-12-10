@@ -6,25 +6,40 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 <body>
-  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
-    <p><strong>Description:</strong></p>
-    <p><strong>Encoding:</strong></p>
-    <ul>
-      <li><strong>Mark:</strong> Trail is used to connect temperature trends for each category.</li>
-      <li><strong>Channels:</strong>
-        <ul>
-          <li><strong>X-Axis:</strong> Year (2023 and 2024).</li>
-          <li><strong>Y-Axis:</strong> Accident severity (minor or severe).</li>
-          <li><strong>Color:</strong> Represents temperature delta (2024-2023) using a red-to-blue diverging scale.</li>
-          <li><strong>Size:</strong> Encodes average temperature (°C), with larger marks indicating higher temperatures.</li>
-          <li><strong>Columns:</strong> Separate the visualization by <code>day_period</code> (Morning, Afternoon, Evening, Night).</li>
-        </ul>
-      </li>
+  <div style="position: relative; padding: 20px; border: 2px solid #1E293B; border-radius: 12px; background-color: #F8FAFC; width: 60%; margin-bottom: 25px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-top: 5px; margin-bottom: 15px; font-family: 'Arial', sans-serif; font-size: 18px; color: #334155; font-weight: bold;">
+        <strong>Description:</strong>
+    </h3>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        <strong>Encoding:</strong>
+    </p>
+    <ul style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5; padding-left: 20px;">
+        <li><strong>Mark:</strong> Trail is used to connect temperature trends for each category.</li>
+        <li><strong>Channels:</strong>
+            <ul style="padding-left: 20px;">
+                <li><strong>X-Axis:</strong> Year (2023 and 2024).</li>
+                <li><strong>Y-Axis:</strong> Accident severity (minor or severe).</li>
+                <li><strong>Color:</strong> Represents temperature delta (2024-2023) using a red-to-blue diverging scale.</li>
+                <li><strong>Size:</strong> Encodes average temperature (°C), with larger marks indicating higher temperatures.</li>
+                <li><strong>Columns:</strong> Separate the visualization by <code>day_period</code> (Morning, Afternoon, Evening, Night).</li>
+            </ul>
+        </li>
     </ul>
-    <p><strong>Interaction:</strong> Hover to reveal tooltips with year, temperature, and delta values for detailed insights.</p>
-    <p><strong>Value Added:</strong> Highlights temperature changes across years by day periods and their correlation with accident severity.</p>
-    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
-  </div>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Interaction:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Hover to reveal tooltips with year, temperature, and delta values for detailed insights.
+    </p>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Value Added:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Highlights temperature changes across years by day periods and their correlation with accident severity.
+    </p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #1E293B;"></div>
+</div>
+
   
   <hr>
   <div id="vis"/>

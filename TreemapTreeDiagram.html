@@ -6,11 +6,27 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 <body>
-  <div style="position: relative; padding: 15px; border: 2px dashed #0072B2; border-radius: 10px; background-color: #e1f6ff; width: 50%; margin-bottom: 15px;">
-    <p><strong>Description:</strong></p>
-    <p>1st visualization:  tree diagram provides a hierarchical overview of geographic regions, starting with the "United Arab Emirates" at the top level and branching down into emirates, then areas. It visualizes the structure in a tidy or cluster format, allowing users to explore relationships and hierarchical dependencies. 2nd Visualization: treemap illustrates the proportional distribution of accidents across different emirates and areas. Each rectangle's size represents the scaled count of accidents, providing an intuitive view of where incidents are concentrated. The hierarchical nesting reflects the emirates and their respective areas.   Interaction: Clicking on a node in the tree or a rectangle in the treemap highlights the selected region, enabling a focused view of the chosen emirate or area.</p>
-    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #0072B2;"></div>
-  </div>
+  <div style="position: relative; padding: 20px; border: 2px solid #1E293B; border-radius: 12px; background-color: #F8FAFC; width: 60%; margin-bottom: 25px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-top: 5px; margin-bottom: 15px; font-family: 'Arial', sans-serif; font-size: 18px; color: #334155; font-weight: bold;">
+        <strong>Description:</strong>
+    </h3>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        1st visualization: The tree diagram provides a hierarchical overview of geographic regions, starting with the "United Arab Emirates" at the top level and branching down into emirates, then areas. It visualizes the structure in a tidy or cluster format, allowing users to explore relationships and hierarchical dependencies.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        2nd visualization: The treemap illustrates the proportional distribution of accidents across different emirates and areas. Each rectangle's size represents the scaled count of accidents, providing an intuitive view of where incidents are concentrated. The hierarchical nesting reflects the emirates and their respective areas.
+    </p>
+    <h4 style="margin-bottom: 10px; padding-bottom: 5px; font-family: 'Arial', sans-serif; font-size: 16px; color: #334155; font-weight: bold;">
+        <strong>Interaction:</strong>
+    </h4>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Clicking on a node in the tree diagram highlights the selected region and filters the treemap to display data pertinent to the chosen emirate or area.
+    </p>
+    <p style="font-family: 'Arial', sans-serif; font-size: 16px; color: #475569; line-height: 1.5;">
+        Similarly, selecting a rectangle in the treemap focuses the tree diagram to emphasize the selected region, enabling users to explore hierarchical relationships in greater detail.
+    </p>
+    <div style="position: absolute; bottom: -15px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #1E293B;"></div>
+</div>
   <hr>
   <div id="vis"/>
   <script>
