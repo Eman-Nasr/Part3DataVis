@@ -38,20 +38,25 @@
           "aggregate": "count"
         },
         "color": {
-          "field": "Emirate",
-          "type": "nominal",
-          "scale": {
-            "range": [
-              "#0996ce",
-              "#f58442",
-              "#5b6795",
-              "#abd46f",
-              "#f19c62",
-              "#8d355f",
-              "#8c3e64",
-              "#293256"
-            ]
-          }
+          "condition": {
+            "param": "emirateSelection",
+            "field": "Emirate",
+            "type": "nominal",
+            "scale": {
+              "range": [
+                "#0996ce",
+                "#f58442",
+                "#5b6795",
+                "#abd46f",
+                "#f19c62",
+                "#8d355f",
+                "#8c3e64",
+                "#293256"
+              ]
+            },
+            "legend": {"orient": "top", "title": "Emirate", "symbolSize": 20}
+          },
+          "value": "lightgray"
         },
         "tooltip": [
           {"field": "Emirate", "type": "nominal", "title": "Emirate"},
@@ -66,9 +71,10 @@
       "transform": [{"filter": {"selection": "acciTypeSelection"}}],
       "selection": {
         "emirateSelection": {
-          "type": "single",
+          "type": "multi",
           "fields": ["Emirate"],
-          "on": "click"
+          "on": "click",
+          "toggle": "event.shiftKey ? true : false"
         }
       }
     },
@@ -86,20 +92,37 @@
           "stack": true
         },
         "color": {
-          "field": "acci_name",
-          "type": "nominal",
-          "scale": {
-            "range": [
-              "#0996ce",
-              "#f58442",
-              "#5b6795",
-              "#abd46f",
-              "#f19c62",
-              "#8d355f",
-              "#8c3e64",
-              "#5b6795"
-            ]
-          }
+          "condition": {
+            "param": "acciTypeSelection",
+            "field": "acci_name",
+            "type": "nominal",
+            "scale": {
+              "range": [
+                "#0996ce",
+                "#f58442",
+                "#5b6795",
+                "#abd46f",
+                "#f19c62",
+                "#8d355f",
+                "#8c3e64",
+                "#293256",
+                "#ffcc00",
+                "#ff6600",
+                "#99cc00",
+                "#0099cc",
+                "#9966ff",
+                "#cc0066",
+                "#66ccff",
+                "#66ff66"
+              ]
+            },
+            "legend": {
+              "orient": "right",
+              "title": "Accident Type",
+              "symbolSize": 20
+            }
+          },
+          "value": "lightgray"
         },
         "radius": {
           "field": "acci_id",
@@ -119,9 +142,10 @@
       },
       "selection": {
         "acciTypeSelection": {
-          "type": "single",
+          "type": "multi",
           "fields": ["acci_name"],
-          "on": "click"
+          "on": "click",
+          "toggle": "event.shiftKey ? true : false"
         }
       }
     },
@@ -152,10 +176,7 @@
           "type": "quantitative",
           "title": "Accident Count"
         },
-        "color": {
-          "field": "Emirate",
-          "type": "nominal"
-        },
+        "color": {"field": "Emirate", "type": "nominal"},
         "tooltip": [
           {"field": "month", "type": "temporal", "title": "Month"},
           {
@@ -167,6 +188,7 @@
       }
     }
   ],
+  "resolve": {"scale": {"color": "independent"}},
   "config": {}
 };
     vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
