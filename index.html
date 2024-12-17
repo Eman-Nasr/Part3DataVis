@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .visualization-col img, 
+        .tabcontent img {
+            order: 2; /* Place the image after the text */
+            width: 40%; /* Adjust the size of the image */
+            max-width: 400px; /* Limit the image size */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 12px; /* Smooth rounded corners */
+            border: 2px solid #E5E7EB; /* Light gray inner frame */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+            margin-left: 5%; 
+            object-fit: cover; /* Maintain image aspect ratio */
+        }
+        .tabcontent img {
+            margin-top: 50px; /* Adjust the value to move the image further down */
+        }
+             
         .visualization{
             width: 1200px; /* Fixed width for the .facility container */
             margin: 0 auto; /* Centers the container */
@@ -19,11 +35,9 @@
             border-radius: 10px;
             margin-bottom: 5%;
             text-align: left;
+            
         }
-        .visualization-col img{
-            width: 100%;
-            border-radius: 10px;
-        }
+    
         .visualization-col p {
             width: 45%; /* Adjusts the width of the paragraph */
             padding: 15px;
@@ -33,12 +47,7 @@
             color:var(--heading-color);
             margin-bottom: 20px;
         }
-        .visualization-col img {
-            width: 45%; /* Adjusts the width of the image */
-            height: auto; /* Maintains the aspect ratio */
-            border-radius: 10px;
-            margin-left: 5%; /* Adds some space between the text and the image */
-        }
+   
         
         
         .visualization-tabs {
@@ -51,16 +60,14 @@
     
         }
                 
-        
-        
-        
+    
         
         .course-description {
             display: none;
             /* Additional styling */
         }
         .toggle-button {
-            background-color: #fff3f3; /* Light pink background */
+            background-color: #fff3f3; 
             color: rgb(188, 188, 188); /* White text */
             border: none; /* Removes the default border */
             padding: 10px 20px; /* Adds some padding for better visual appearance */
@@ -174,8 +181,6 @@
     .linked-class-button:hover {
         background-color: #334155; /* Slightly lighter shade for hover */
     }
-
-
     </style>
 </head>
 <body>
@@ -195,7 +200,7 @@
         </div>
 
         <div id="CircularCharts" class="tabcontent">
-            <img src="images/basketball.webp" alt="CircularCharts">
+            <img src="images/piecharts.jpeg" alt="CircularCharts">
             <div class="text-wrapper">
                 <h1>Circular Charts</h1>
                 <h4>Description:</h4>
@@ -215,7 +220,7 @@
         <div id="HeatMapAreaChart" class="tabcontent">
 
        
-          <img src="images/basketball.webp" alt="Heatmap Area Chart">
+          <img src="images/heatmap.jpeg" alt="Heatmap Area Chart">
           <div class="text-wrapper">
             <h1>HeatMap Area Chart</h1>
               <h4>Description:</h4>
@@ -237,7 +242,7 @@
         </div>
 
         <div id="MapBar" class="tabcontent">
-          <img src="images/cafeteria.jpg" alt="Map, Line, and Bar Chart">
+          <img src="images/map.jpeg" alt="Map, Line, and Bar Chart">
           <div class="text-wrapper">
           <h1>Map, Line, and Bar Chart</h1>
               <h4>Description:</h4>
@@ -262,7 +267,7 @@
         </div>
 
         <div id="Overview" class="tabcontent">
-            <img src="images/cafeteria.jpg" alt="Overview">
+            <img src="images/overview.jpeg" alt="Overview">
             <div class="text-wrapper">
                 <h1>Overview Details area chart</h1>
               <h4>Description:</h4>
@@ -284,7 +289,7 @@
         </div>
 
         <div id="PieAndStackedBar" class="tabcontent">
-            <img src="images/basketball.webp" alt="PieAndStackedBar">
+            <img src="images/pieAndStackedBar.jpeg" alt="PieAndStackedBar">
             <div class="text-wrapper">
                 <h1>Pie and Stacked Bar</h1>
                 <h4>Description:</h4>
@@ -299,7 +304,7 @@
         </div>
 
         <div id="TreemapTreeDiagram" class="tabcontent">
-            <img src="images/basketball.webp" alt="TreemapTreeDiagram">
+            <img src="images/treemap.jpeg" alt="TreemapTreeDiagram">
             <div class="text-wrapper">
                 <h1>Treemap and Tree Diagram</h1>
                 <h4>Description:</h4>
@@ -315,9 +320,32 @@
         </div>
 
         <div id="Weather" class="tabcontent">
-            <img src="images/cafeteria.jpg" alt="Weather">
+            <img src="images/weather.jpeg" alt="Weather">
             <div class="text-wrapper">
-                <p>Our cafeteria prides itself on serving a variety of tasty and healthy food options that cater to the diverse dietary preferences and nutritional needs of our students. From locally-sourced fruits and vegetables to global cuisine, our menu is designed to nourish the body and delight the senses. Dietitians and chefs work hand in hand to create balanced meals that support cognitive function and physical health, ensuring that students have the energy and focus needed for academic excellence and personal growth.</p>
+                <p>
+                    The visualization provides a detailed comparison of 
+                    <strong>seasonal temperature changes</strong> between 
+                    <span style="color: #2563EB; font-weight: bold;">2023</span> and 
+                    <span style="color: #2563EB; font-weight: bold;">2024</span>, 
+                    exploring their relationship with <strong>accident severity</strong>.  
+                    The data is segmented into <strong>four day periods</strong> for a clearer analysis:
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.6;">
+                    <li><strong>Morning</strong></li>
+                    <li><strong>Afternoon</strong></li>
+                    <li><strong>Evening</strong></li>
+                    <li><strong>Night</strong></li>
+                </ul>
+                <p>
+                    On the <strong>X-axis</strong>, the years (<span style="color: #2563EB;">2023</span> and 
+                    <span style="color: #2563EB;">2024</span>) are displayed, while the <strong>Y-axis</strong> highlights 
+                    <span style="color: #16A34A;">two categories</span> of accident severity:
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.6;">
+                    <li><strong>بسيط</strong> (Minor)</li>
+                    <li><strong>بليغ</strong> (Severe)</li>
+                </ul>
+                
                 <button class="linked-class-button" onclick="window.open('Weather.html', '_blank');">
                     View Visualization
                 </button>
